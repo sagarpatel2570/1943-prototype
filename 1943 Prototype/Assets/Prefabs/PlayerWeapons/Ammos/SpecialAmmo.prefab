@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6048487438964806066}
   - component: {fileID: 6048487438964806067}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c75b41de96a15ad4e91e297a25ca3b9d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -94,8 +94,9 @@ GameObject:
   - component: {fileID: 6048487440745643674}
   - component: {fileID: 6048487440745643677}
   - component: {fileID: 4659258388438565668}
-  m_Layer: 0
-  m_Name: NormalAmmo
+  - component: {fileID: 8581296997308520800}
+  m_Layer: 13
+  m_Name: SpecialAmmo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -180,3 +181,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selfDestructTime: 3
+--- !u!114 &8581296997308520800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6048487440745643676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b2b52ea785912e4993fbdb64e58b4cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  destroyOnTrigger: 1
+  damage: 200

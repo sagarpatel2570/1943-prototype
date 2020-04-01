@@ -15,15 +15,19 @@ public class Weapon : MonoBehaviour,IWeapon
     public GameObject ammoPrefab;
     public Transform ammoSpawnPoint;
     public WeaponState currentWeaponState;
+    public string weaponName;
     public int ammo;
     public int magzineQty;
     public float reloadTime;
     public float weaponCoolDownTime;
+    public bool infiniteAmmo;
 
     protected int ammoLeftInMagzine;
     protected int currentAmmoLeft;
     protected float currentReloadTime;
     protected float cooldownTimeLeft;
+
+    protected ICharacterWeapon owner;
 
     void OnEnable()
     {
@@ -87,18 +91,25 @@ public class Weapon : MonoBehaviour,IWeapon
         if(currentReloadTime <= 0)
         {
             currentReloadTime = reloadTime;
-            int ammoTOAdd = 0;
-            if(currentAmmoLeft > magzineQty)
+            if (!infiniteAmmo)
             {
-                currentAmmoLeft -= magzineQty;
-                ammoTOAdd = magzineQty;
+                int ammoTOAdd = 0;
+                if (currentAmmoLeft > magzineQty)
+                {
+                    currentAmmoLeft -= magzineQty;
+                    ammoTOAdd = magzineQty;
+                }
+                else
+                {
+                    ammoTOAdd = currentAmmoLeft;
+                    currentAmmoLeft = 0;
+                }
+                ammoLeftInMagzine = ammoTOAdd;
             }
             else
             {
-                ammoTOAdd = currentAmmoLeft;
-                currentAmmoLeft = 0;
+                ammoLeftInMagzine = magzineQty;
             }
-            ammoLeftInMagzine = ammoTOAdd;
 
             if(ammoLeftInMagzine > 0)
             {
@@ -107,6 +118,8 @@ public class Weapon : MonoBehaviour,IWeapon
             else
             {
                 currentWeaponState = WeaponState.OUTOFAMMO;
+                owner.RemoveWeapon(this);
+                Destroy(gameObject);
             }
         }
     }
@@ -117,5 +130,15 @@ public class Weapon : MonoBehaviour,IWeapon
         {
             currentWeaponState = WeaponState.SHOOT;
         }
+    }
+
+    public virtual string WeaponName()
+    {
+        return weaponName;
+    }
+
+    public virtual void Init(ICharacterWeapon character)
+    {
+        owner = character;
     }
 }

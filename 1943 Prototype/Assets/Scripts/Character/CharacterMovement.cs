@@ -35,6 +35,10 @@ public class CharacterMovement : CharacterAbility
 
     protected override void HandleInput()
     {
+        if (!character.isPlayer)
+        {
+            return;
+        }
         horizontalMovement = Input.GetAxisRaw("Horizontal");
         verticalMovement = Input.GetAxisRaw("Vertical");
     }
