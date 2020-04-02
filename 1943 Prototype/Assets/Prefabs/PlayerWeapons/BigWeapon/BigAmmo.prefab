@@ -67,8 +67,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1176445687
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 8527111519951476930, guid: aa4e6a48d41059c49985c5dbb9ec741c,
     type: 3}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.1015625, y: 0.1015625}
+  m_Size: {x: 0.49, y: 0.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -199,3 +199,5 @@ MonoBehaviour:
     m_Bits: 4096
   destroyOnTrigger: 1
   damage: 300
+  damageEffect: {fileID: 2112192525895489841, guid: b4f66a68b5adf5d46a191d5ebb51568e,
+    type: 3}
