@@ -12,11 +12,11 @@ public class CharacterMovement : CharacterAbility
     public float deceleration = 1f;
 
     public float MovementSpeed { get; set; }
+    public Vector2 CurrentInput;
 
     float horizontalMovement;
     float verticalMovement;
     Vector3 movementVector;
-    public Vector2 CurrentInput;
     Vector2 normalizedInput;
     Vector2 lerpedInput = Vector2.zero;
     float currentAcceleration = 0f;

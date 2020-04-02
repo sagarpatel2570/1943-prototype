@@ -8,6 +8,7 @@ public interface ICharacterWeapon
     void RemoveWeapon(IWeapon weapon);
     void AddWeapon(IWeapon weapon);
     void ProcessWeapon(string weaponName);
+    void AimWeapon(Vector3 dir);
 }
 
 public class CharacterWeapon : CharacterAbility,ICharacterWeapon
@@ -28,15 +29,27 @@ public class CharacterWeapon : CharacterAbility,ICharacterWeapon
 
     public void RemoveWeapon(IWeapon weapon)
     {
-        if(primaryWeapon == weapon)
-        {
-            primaryWeapon = null;
-        }
-
         if (secondaryWeapon == weapon)
         {
             secondaryWeapon = null;
         }
+    }
+
+    public void RemoveSecondaryWeapon()
+    {
+        if (secondaryWeapon != null)
+        {
+            secondaryWeapon.DestroyWeapon();
+        }
+    }
+
+    public void AddSecondaryWeapon(GameObject prefab)
+    {
+        GameObject weapon = Instantiate(prefab, transform.position, Quaternion.identity);
+        weapon.transform.SetParent(secondaryWeaponTransform);
+        weapon.transform.localPosition = Vector3.zero;
+        secondaryWeapon = weapon.GetComponent<IWeapon>();
+        secondaryWeapon.Init(this);
     }
 
     public override void Init()
@@ -56,11 +69,7 @@ public class CharacterWeapon : CharacterAbility,ICharacterWeapon
 
         if (secondaryWeaponGo != null)
         {
-            GameObject weapon = Instantiate(secondaryWeaponGo, transform.position, Quaternion.identity);
-            weapon.transform.SetParent(secondaryWeaponTransform);
-            weapon.transform.localPosition = Vector3.zero;
-            secondaryWeapon = weapon.GetComponent<IWeapon>();
-            secondaryWeapon.Init(this);
+            AddSecondaryWeapon(secondaryWeaponGo);
         }
     }
 
@@ -85,5 +94,10 @@ public class CharacterWeapon : CharacterAbility,ICharacterWeapon
     public void ProcessWeapon(string weaponName)
     {
         
+    }
+
+    public void AimWeapon(Vector3 dir)
+    {
+
     }
 }

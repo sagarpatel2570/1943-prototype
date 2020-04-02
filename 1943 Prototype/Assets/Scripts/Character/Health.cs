@@ -7,27 +7,26 @@ public class Health : MonoBehaviour, ITakeDamage
     public ParticleSystem deathEffect;
     public int health;
 
-    int currentHealth;
+    public int CurrentHealth { get; protected set; }
 
     void OnEnable()
     {
-        currentHealth = health;
+        CurrentHealth = health;
     }
 
     public void TakeDamage(int damage)
     {
-        IGiveScore obj = GetComponent<IGiveScore>();
-        if(obj != null)
-        {
-            obj.GiveScore();
-        }
-
-        currentHealth -= damage;
-        if(currentHealth > 0)
+        CurrentHealth -= damage;
+        if(CurrentHealth > 0)
         {
             return;
         }
 
+        IGiveScore obj = GetComponent<IGiveScore>();
+        if (obj != null)
+        {
+            obj.GiveScore();
+        }
 
         IDeath death = GetComponent<IDeath>();
         if (death != null)

@@ -6,10 +6,23 @@ public class EnemiesWave : MonoBehaviour
 {
     public List<WaveInfo> waves;
 
+    public Character bossPrefab;
+    public PathInfo bossPath;
+
+    public bool debug;
+
     int numberOfEnemiesPerSetLeft;
     int numberOfSetsPerWaveLeft;
 
     private void Start()
+    {
+        if (debug)
+        {
+            StartCoroutine(SpawnEnemiesWave());
+        }
+    }
+
+    public void StartSpawingEnemiesWaves()
     {
         StartCoroutine(SpawnEnemiesWave());
     }
@@ -23,14 +36,20 @@ public class EnemiesWave : MonoBehaviour
             numberOfSetsPerWaveLeft = currentWaveInfo.numberOfSet;
             List<PathInfo> pathToTake = new List<PathInfo>(currentWaveInfo.pathCreator.paths);
             pathToTake.Shuffle();
-            int numberOfPathToConsider = Random.Range(1, pathToTake.Count);
-            List<GameObject> enemiesPrefab = new List<GameObject>();
-            for (int k = 0; k < numberOfPathToConsider; k++)
-            {
-                enemiesPrefab.Add(currentWaveInfo.enemies[Random.Range(0, currentWaveInfo.enemies.Count)]);
-            }
+            
             while (numberOfSetsPerWaveLeft > 0)
             {
+                int numberOfPathToConsider = Random.Range(1, pathToTake.Count);
+                if (currentWaveInfo.chooseAllPath)
+                {
+                    numberOfPathToConsider = pathToTake.Count;
+                }
+                List<GameObject> enemiesPrefab = new List<GameObject>();
+                for (int k = 0; k < numberOfPathToConsider; k++)
+                {
+                    enemiesPrefab.Add(currentWaveInfo.enemies[Random.Range(0, currentWaveInfo.enemies.Count)]);
+                }
+
                 numberOfSetsPerWaveLeft--;
                 numberOfEnemiesPerSetLeft = currentWaveInfo.numberOfEnemiesPerSet;
                 while (numberOfEnemiesPerSetLeft > 0)
@@ -47,7 +66,26 @@ public class EnemiesWave : MonoBehaviour
                 yield return new WaitForSeconds(currentWaveInfo.timeBetweenSet);
             }
         }
-        Debug.LogError("Waves Finished ");
+        yield return new WaitForSeconds(5);
+        EnemyMovement boss = SimplePool.Spawn(
+               bossPrefab.gameObject, transform.position, Quaternion.identity).GetComponent<EnemyMovement>();
+        boss.Init(bossPath);
+
+        boss.gameObject.GetComponent<Character>().OnDeath += OnBossDead;
+
+    }
+
+    private void OnBossDead()
+    {
+        GUIPanelController.Instance.ChangeState(PanelType.GAMEWINPANEL);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (bossPath != null)
+        {
+            bossPath.DrawGizmos();
+        }
     }
 
 }
@@ -57,6 +95,7 @@ public class WaveInfo
 {
     public PathCreator pathCreator;
     public List<GameObject> enemies;
+    public bool chooseAllPath;
     public int numberOfEnemiesPerSet;
     public int numberOfSet;
     public float timeBetweenSet;

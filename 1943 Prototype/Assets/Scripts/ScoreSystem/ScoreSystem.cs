@@ -8,15 +8,18 @@ public class ScoreSystem : MonoBehaviour
 {
     static event Action<int> OnScoreChanged;
     static int score;
+    static int enemyKilled;
 
     private void OnEnable()
     {
         score = 0;
+        enemyKilled = 0;
     }
 
     public static void AddScore (int points)
     {
         score += points;
+        enemyKilled++;
         OnScoreChanged?.Invoke(score);
     }
 

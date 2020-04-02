@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System;
 
 // character consisit the list of all the abilities and update s them every update
 [SelectionBase]
 public class Character : MonoBehaviour,IDeath
 {
-    public event Action<Character> OnDeath;
+    public event Action OnDeath;
     public bool isPlayer;
     public CharacterStates state;
 
@@ -85,17 +86,6 @@ public class Character : MonoBehaviour,IDeath
         }
     }
 
-    /// <summary>
-    /// we update the rotation of model based on the current direction of player
-    /// </summary>
-    void LateUpdate()
-    {
-        if (model != null)
-        {
-            model.transform.localEulerAngles = -Vector3.forward * transform.localEulerAngles.z;
-        }
-    }
-
     public void Reset()
     {
         if (characterAbilities == null)
@@ -125,51 +115,12 @@ public class Character : MonoBehaviour,IDeath
         
         CharacterStates previousState = this.state;
         this.state = state;
-        UpdateAnimator(state, previousState);
     }
 
-    void UpdateAnimator(CharacterStates state,CharacterStates previousState)
-    {
-        if(Animator == null)
-        {
-            return;
-        }
-        Animator.ResetTrigger("Idle");
-
-        // set trigger
-        switch (state)
-        {
-            case CharacterStates.IDLE:
-                Animator.SetTrigger("Idle");
-                break;
-                case CharacterStates.MOVE:
-
-                if (CharacterMovement.CurrentInput.x < 0)
-                {
-                    if (Mathf.Abs(CharacterMovement.CurrentInput.x) > 0.01f)
-                    {
-                        Animator.SetTrigger("MoveLeft");
-                    }
-                }
-                else 
-                {
-                    if (Mathf.Abs(CharacterMovement.CurrentInput.x) > 0.01f)
-                    {
-                        Animator.SetTrigger("MoveRight");
-                    }
-                }
-
-                break;
-            case CharacterStates.ATTACK:
-                break;
-            case CharacterStates.DEATH:
-                break;
-        }
-    }
 
     public void Destroy()
     {
-        OnDeath?.Invoke(this);
+        OnDeath?.Invoke();
     }
 }
 

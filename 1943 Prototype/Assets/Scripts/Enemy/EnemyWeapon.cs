@@ -37,4 +37,12 @@ public class EnemyWeapon : CharacterAbility,ICharacterWeapon
     {
         weaponsNameDic[weaponName].Shoot();
     }
+
+    public void AimWeapon(Vector3 dir)
+    {
+        foreach (IWeapon weapon in weaponsNameDic.Values)
+        {
+            weapon.AimWeapon(dir);
+        }
+    }
 }

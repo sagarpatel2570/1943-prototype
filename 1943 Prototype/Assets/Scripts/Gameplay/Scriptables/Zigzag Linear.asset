@@ -17,17 +17,17 @@ MonoBehaviour:
     wayPoints:
     - {x: -4, y: 11, z: 0}
     - {x: 4, y: 0, z: 0}
-    - {x: -4, y: -11, z: 0}
+    - {x: -4, y: -30, z: 0}
     pathType: 0
   - name: Middle
     wayPoints:
     - {x: 0, y: 11, z: 0}
-    - {x: 0, y: -11, z: 0}
+    - {x: 0, y: -30, z: 0}
     pathType: 0
   - name: Right
     wayPoints:
     - {x: 4, y: 11, z: 0}
     - {x: -4, y: 0, z: 0}
-    - {x: 4, y: -11, z: 0}
+    - {x: 4, y: -30, z: 0}
     pathType: 0
   debugPath: 1

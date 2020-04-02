@@ -24,4 +24,14 @@ public class PathInfo
         this.wayPoints = wayPoints;
         this.pathType = pathType;
     }
+
+    public void DrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        for (int i = 0; i < wayPoints.Count; i++)
+        {
+            Gizmos.DrawSphere(wayPoints[i], 0.2f);
+            Gizmos.DrawLine(wayPoints[i], wayPoints[(i + 1) % wayPoints.Count]);
+        }
+    }
 }

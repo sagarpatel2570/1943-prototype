@@ -19,8 +19,8 @@ TagManager:
   - Map
   - EnemyDamage
   - Damagable
-  - 
-  - 
+  - DeadZone
+  - PickupItem
   - 
   - 
   - 

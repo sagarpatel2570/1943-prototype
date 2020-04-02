@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1807977524373691652}
   - component: {fileID: 1807977524373691655}
-  - component: {fileID: 1807977524373691654}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -82,25 +81,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &1807977524373691654
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1807977524373691653}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: de452e97ab8a4e946a8eae06331b5aa1, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1807977525277524454
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,6 +97,8 @@ GameObject:
   - component: {fileID: 1807977525277524474}
   - component: {fileID: 1807977525277524479}
   - component: {fileID: 1367185116}
+  - component: {fileID: 7171186220334007777}
+  - component: {fileID: 5776121949791594667}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -265,6 +247,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathEffect: {fileID: 0}
   health: 1
+--- !u!114 &7171186220334007777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807977525277524454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbefde832fa401047bb0bb0bbf2dd5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabableItem: {fileID: 0}
+--- !u!114 &5776121949791594667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807977525277524454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517f4b76220cfb044a90368d11d4a330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invulnerableTime: 1
+  damageArea: {fileID: 4781370329159903255}
 --- !u!1 &2921202135129539993
 GameObject:
   m_ObjectHideFlags: 0

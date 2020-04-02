@@ -141,4 +141,14 @@ public class Weapon : MonoBehaviour,IWeapon
     {
         owner = character;
     }
+
+    public virtual void AimWeapon(Vector3 dir)
+    {
+        transform.up = dir;
+    }
+
+    public void DestroyWeapon()
+    {
+        Destroy(gameObject);
+    }
 }
